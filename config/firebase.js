@@ -7,6 +7,7 @@ import {
 	signInWithPopup,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getFunctions, httpsCallable } from "firebase/functions";
 import Constants from "expo-constants";
 
 const firebaseConfig = {
@@ -23,6 +24,9 @@ initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore();
 export const provider = new GoogleAuthProvider();
+const functions = getFunctions();
+
+export const labelImage = httpsCallable(functions, "labelImage");
 
 export async function registerNewUser(email, password) {
 	try {
